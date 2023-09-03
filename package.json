@@ -1,0 +1,27 @@
+{
+  "name": "violet-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/app.ts",
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "@types/bcrypt": "^5.0.0",
+    "@types/node": "^20.5.9",
+    "tsx": "^3.12.8",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.3"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "fastify": "^4.22.2",
+    "vite-tsconfig-paths": "^4.2.0"
+  }
+}
