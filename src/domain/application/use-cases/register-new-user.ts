@@ -40,6 +40,10 @@ export class RegisterNewUserUseCase {
       plants: [],
     });
 
+    await this.userRepository.create(user);
+
+    user.password = undefined;
+
     return { user };
   }
 }

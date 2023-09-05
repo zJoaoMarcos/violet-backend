@@ -1,6 +1,13 @@
 import { InMemoryPlantsRepository } from "@/infra/repositories/in-memory/in-memory-plants-repository";
 import { InMemoryUsersRepository } from "@/infra/repositories/in-memory/in-memory-users-repository";
+import { makeCreateUser } from "./factories/make-create-user";
 import { RegisterNewPlantUseCase } from "./register-new-plant";
+
+import { Plant } from "@/domain/enterprise/entities/plant";
+import { randomUUID } from "node:crypto";
+import { PlantWithSameNameAlreadyExistsError } from "./errors/plant-with-same-name-already-exisits.error";
+import { UserNotFoundError } from "./errors/user-not-found.error";
+import { makeRegisterPlant } from "./factories/make-register-plant";
 
 let plantsRepository: InMemoryPlantsRepository;
 let usersRepository: InMemoryUsersRepository;
@@ -13,5 +20,54 @@ describe("Register New Plant Use Case", () => {
     sut = new RegisterNewPlantUseCase(plantsRepository, usersRepository);
   });
 
-  it("should be able register new plant", () => {});
+  it("should be able register new plant", async () => {
+    const user = makeCreateUser({
+      name: "Jhon",
+    });
+    usersRepository.items.push(user);
+
+    const { plant } = await sut.execute({
+      name: "violetinha",
+      age: 2.0,
+      kind: "violet",
+      serial: randomUUID(),
+      userId: user.id.toString(),
+    });
+
+    expect(plant).toBeInstanceOf(Plant);
+    expect(plant.name).toEqual("violetinha");
+    expect(plant.owner.name).toEqual("Jhon");
+    expect(plant.owner.plants[0].id).toEqual(plant.id);
+  });
+
+  it("should not be able register new plant with name already existing", async () => {
+    const user = makeCreateUser({
+      name: "Jhon",
+    });
+    usersRepository.items.push(user);
+
+    plantsRepository.items.push(makeRegisterPlant({ name: "violetinha" }));
+
+    await expect(() =>
+      sut.execute({
+        name: "violetinha",
+        age: 2.0,
+        kind: "violet",
+        serial: randomUUID(),
+        userId: user.id.toString(),
+      })
+    ).rejects.toBeInstanceOf(PlantWithSameNameAlreadyExistsError);
+  });
+
+  it("should not be able register new plant with a nonexisting owner", async () => {
+    await expect(() =>
+      sut.execute({
+        name: "violetinha",
+        age: 2.0,
+        kind: "violet",
+        serial: randomUUID(),
+        userId: "fake-owner-id",
+      })
+    ).rejects.toBeInstanceOf(UserNotFoundError);
+  });
 });

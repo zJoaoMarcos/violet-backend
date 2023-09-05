@@ -35,9 +35,9 @@ export class RegisterNewPlantUseCase {
       throw new PlantWithSameNameAlreadyExistsError();
     }
 
-    const ownerExists = await this.userRepository.findById(userId);
+    const owner = await this.userRepository.findById(userId);
 
-    if (!ownerExists) {
+    if (!owner) {
       throw new UserNotFoundError();
     }
 
@@ -46,10 +46,14 @@ export class RegisterNewPlantUseCase {
       age,
       kind,
       serial,
-      owner: ownerExists,
+      owner,
     });
 
     await this.plantRepository.create(plant);
+
+    owner.plants = [...owner.plants, plant];
+
+    await this.userRepository.save(owner);
 
     return { plant };
   }
