@@ -54,4 +54,8 @@ export class Plant extends Entity<PlantProps> {
   get owner() {
     return this.props.owner;
   }
+
+  set owner(owner: User) {
+    this.props.owner = owner;
+  }
 }

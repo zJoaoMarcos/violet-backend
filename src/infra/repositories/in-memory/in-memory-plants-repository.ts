@@ -14,14 +14,12 @@ export class InMemoryPlantsRepository implements IPlantRepository {
     this.items[plantIndex] = plant;
   }
 
-  async findByName(name: string): Promise<Plant> {
-    const plant = this.items.find((plant) => plant.name === name);
+  async findByOwner(owner: string): Promise<Plant[]> {
+    const plants = this.items.filter(
+      (plant) => plant.owner.id.toString() === owner
+    );
 
-    if (!plant) {
-      return null;
-    }
-
-    return plant;
+    return plants;
   }
 
   async findBySerial(serial: string): Promise<Plant> {

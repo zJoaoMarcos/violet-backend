@@ -1,5 +1,5 @@
-import { IUserRepository } from "../../../domain/application/repositories/user.repository";
-import { User } from "../../../domain/enterprise/entities/user";
+import { IUserRepository } from "@/domain/application/repositories/user.repository";
+import { User } from "@/domain/enterprise/entities/user";
 
 export class InMemoryUsersRepository implements IUserRepository {
   items: User[] = [];
@@ -9,23 +9,23 @@ export class InMemoryUsersRepository implements IUserRepository {
   }
 
   async findById(id: string): Promise<User> {
-    const plant = this.items.find((plant) => plant.id.toString() === id);
+    const user = this.items.find((user) => user.id.toString() === id);
 
-    if (!plant) {
+    if (!user) {
       return null;
     }
 
-    return plant;
+    return user;
   }
 
   async findByEmail(email: string): Promise<User> {
-    const plant = this.items.find((plant) => plant.email === email);
+    const user = this.items.find((user) => user.email === email);
 
-    if (!plant) {
+    if (!user) {
       return null;
     }
 
-    return plant;
+    return user;
   }
 
   async save(user: User): Promise<void> {
