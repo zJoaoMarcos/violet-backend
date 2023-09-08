@@ -1,5 +1,5 @@
-import { IPlantRepository } from "../../../domain/application/repositories/plant.repository";
-import { Plant } from "../../../domain/enterprise/entities/plant";
+import { IPlantRepository } from "@/domain/application/repositories/plant.repository";
+import { Plant } from "@/domain/enterprise/entities/plant";
 
 export class InMemoryPlantsRepository implements IPlantRepository {
   items: Plant[] = [];

@@ -1,8 +1,7 @@
-import { InMemoryUsersRepository } from "@/infra/repositories/in-memory/in-memory-users-repository";
-
 import { User } from "@/domain/enterprise/entities/user";
+import { makeCreateUser } from "@/test/factories/make-create-user";
+import { InMemoryUsersRepository } from "@/test/repositories/in-memory/in-memory-users-repository";
 import { EmailAlreadyRegisteredError } from "./errors/email-already-registered.error";
-import { makeCreateUser } from "./factories/make-create-user";
 import { RegisterNewUserUseCase } from "./register-new-user";
 
 let usersRepository: InMemoryUsersRepository;

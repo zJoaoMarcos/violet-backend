@@ -1,5 +1,5 @@
-import { InMemoryUsersRepository } from "@/infra/repositories/in-memory/in-memory-users-repository";
-import { makeCreateUser } from "./factories/make-create-user";
+import { makeCreateUser } from "@/test/factories/make-create-user";
+import { InMemoryUsersRepository } from "@/test/repositories/in-memory/in-memory-users-repository";
 import { UpdatePasswordUseCase } from "./update-password";
 
 import * as bcrypt from "bcrypt";

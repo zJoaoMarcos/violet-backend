@@ -1,8 +1,8 @@
 import { Plant } from "@/domain/enterprise/entities/plant";
-import { InMemoryPlantsRepository } from "@/infra/repositories/in-memory/in-memory-plants-repository";
-import { InMemoryUsersRepository } from "@/infra/repositories/in-memory/in-memory-users-repository";
-import { makeCreateUser } from "./factories/make-create-user";
-import { makeRegisterPlant } from "./factories/make-register-plant";
+import { makeCreateUser } from "@/test/factories/make-create-user";
+import { makeRegisterPlant } from "@/test/factories/make-register-plant";
+import { InMemoryPlantsRepository } from "@/test/repositories/in-memory/in-memory-plants-repository";
+import { InMemoryUsersRepository } from "@/test/repositories/in-memory/in-memory-users-repository";
 import { FetchAllUserPlantsUseCase } from "./fetch-all-user-plants";
 
 let plantsRepository: InMemoryPlantsRepository;

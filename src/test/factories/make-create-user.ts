@@ -1,6 +1,5 @@
+import { User, UserProps } from "@/domain/enterprise/entities/user";
 import { faker } from "@faker-js/faker";
-
-import { User, UserProps } from "../../../enterprise/entities/user";
 
 export function makeCreateUser(override: Partial<UserProps> = {}) {
   const user = User.create({

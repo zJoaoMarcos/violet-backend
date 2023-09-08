@@ -1,8 +1,8 @@
-import { InMemoryUsersRepository } from "@/infra/repositories/in-memory/in-memory-users-repository";
+import { makeCreateUser } from "@/test/factories/make-create-user";
+import { InMemoryUsersRepository } from "@/test/repositories/in-memory/in-memory-users-repository";
 import { SignInUseCase } from "./sign-in";
 
 import * as bcrypt from "bcrypt";
-import { makeCreateUser } from "./factories/make-create-user";
 
 let usersRepository: InMemoryUsersRepository;
 let sut: SignInUseCase;

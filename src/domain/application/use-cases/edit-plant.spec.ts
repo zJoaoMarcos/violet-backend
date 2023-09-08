@@ -1,7 +1,7 @@
-import { InMemoryPlantsRepository } from "@/infra/repositories/in-memory/in-memory-plants-repository";
-import { InMemoryUsersRepository } from "@/infra/repositories/in-memory/in-memory-users-repository";
+import { makeRegisterPlant } from "@/test/factories/make-register-plant";
+import { InMemoryPlantsRepository } from "@/test/repositories/in-memory/in-memory-plants-repository";
+import { InMemoryUsersRepository } from "@/test/repositories/in-memory/in-memory-users-repository";
 import { EditPlantUseCase } from "./edit-plant";
-import { makeRegisterPlant } from "./factories/make-register-plant";
 
 let plantsRepository: InMemoryPlantsRepository;
 let usersRepository: InMemoryUsersRepository;

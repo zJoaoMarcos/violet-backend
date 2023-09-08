@@ -1,6 +1,6 @@
 import { Plant } from "@/domain/enterprise/entities/plant";
-import { InMemoryPlantsRepository } from "@/infra/repositories/in-memory/in-memory-plants-repository";
-import { makeRegisterPlant } from "./factories/make-register-plant";
+import { makeRegisterPlant } from "@/test/factories/make-register-plant";
+import { InMemoryPlantsRepository } from "@/test/repositories/in-memory/in-memory-plants-repository";
 import { FindPlantByIdUseCase } from "./find-plant-by-id";
 
 let plantsRepository: InMemoryPlantsRepository;
