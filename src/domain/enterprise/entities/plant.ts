@@ -1,20 +1,22 @@
 import { Entity } from "../../../core/entities/entity";
 import { UniqueEntityID } from "../../../core/entities/unique-entity-id";
-import { User } from "./user";
 
 export interface PlantProps {
   name: string;
   kind: string;
   age: number;
   serial: string;
-  owner: User;
+  ownerId: string;
 }
 
 export class Plant extends Entity<PlantProps> {
   static create(props: PlantProps, id?: UniqueEntityID) {
-    const plant = new Plant({
-      ...props,
-    });
+    const plant = new Plant(
+      {
+        ...props,
+      },
+      id
+    );
 
     return plant;
   }
@@ -51,11 +53,11 @@ export class Plant extends Entity<PlantProps> {
     this.props.serial = serial;
   }
 
-  get owner() {
-    return this.props.owner;
+  get ownerId() {
+    return this.props.ownerId;
   }
 
-  set owner(owner: User) {
-    this.props.owner = owner;
+  set ownerId(owner: string) {
+    this.props.ownerId = owner;
   }
 }

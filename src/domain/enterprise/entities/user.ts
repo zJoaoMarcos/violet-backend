@@ -12,9 +12,12 @@ export interface UserProps {
 
 export class User extends Entity<UserProps> {
   static create(props: UserProps, id?: UniqueEntityID) {
-    const user = new User({
-      ...props,
-    });
+    const user = new User(
+      {
+        ...props,
+      },
+      id
+    );
 
     return user;
   }
