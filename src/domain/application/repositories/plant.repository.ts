@@ -5,6 +5,5 @@ export interface IPlantRepository {
   save(plant: Plant): Promise<void>;
   findById(id: string): Promise<Plant>;
   findByOwner(owner: string): Promise<Plant[]>;
-  findBySerial(serial: string): Promise<Plant>;
   delete(plant: Plant): Promise<void>;
 }

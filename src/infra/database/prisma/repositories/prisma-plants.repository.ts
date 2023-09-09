@@ -6,14 +6,30 @@ import { PrismaService } from "../prisma";
 export class PrismaPlantsRepository implements IPlantRepository {
   constructor(private prismaService: PrismaService) {}
 
-  create(plant: Plant): Promise<void> {
-    throw new Error("Method not implemented.");
+  async create(plant: Plant): Promise<void> {
+    await this.prismaService.plant.create({
+      data: {
+        id: plant.id.toString(),
+        name: plant.name,
+        kind: plant.kind,
+        age: plant.age,
+        serial: plant.serial,
+        ownerId: plant.ownerId,
+        createdAt: plant.createdAt,
+      },
+    });
   }
-  save(plant: Plant): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
-  findById(id: string): Promise<Plant> {
-    throw new Error("Method not implemented.");
+
+  async findById(id: string): Promise<Plant> {
+    const plant = await this.prismaService.plant.findUnique({
+      where: { id },
+    });
+
+    if (!plant) {
+      return null;
+    }
+
+    return PrismaPlantMapper.toDomain(plant);
   }
 
   async findByOwner(owner: string): Promise<Plant[]> {
@@ -28,10 +44,22 @@ export class PrismaPlantsRepository implements IPlantRepository {
     return plants.map(PrismaPlantMapper.toDomain);
   }
 
-  findBySerial(serial: string): Promise<Plant> {
-    throw new Error("Method not implemented.");
+  async save(plant: Plant): Promise<void> {
+    await this.prismaService.plant.update({
+      where: { id: plant.id.toString() },
+      data: {
+        name: plant.name,
+        kind: plant.kind,
+        age: plant.age,
+        serial: plant.serial,
+        updatedAt: plant.updatedAt,
+      },
+    });
   }
-  delete(plant: Plant): Promise<void> {
-    throw new Error("Method not implemented.");
+
+  async delete(plant: Plant): Promise<void> {
+    await this.prismaService.plant.delete({
+      where: { id: plant.id.toString() },
+    });
   }
 }

@@ -45,7 +45,18 @@ export class PrismaUsersRepository implements IUserRepository {
     return PrismaUserMapper.toDomain(user, user.plants);
   }
 
-  save(user: User): Promise<void> {
-    throw new Error("Method not implemented.");
+  async save(user: User): Promise<void> {
+    await this.prismaService.user.update({
+      where: {
+        id: user.id.toString(),
+      },
+
+      data: {
+        name: user.name,
+        surname: user.surname,
+        passsword: user.password,
+        email: user.email,
+      },
+    });
   }
 }
