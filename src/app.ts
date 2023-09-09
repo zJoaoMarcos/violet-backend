@@ -1,11 +1,8 @@
 import fastify from "fastify";
+import { plantsRoutes } from "./infra/http/controllers/plants/routes";
+import { usersRoutes } from "./infra/http/controllers/users/routes";
 
-const app = fastify();
+export const app = fastify();
 
-app.get("/", async function handler(request, reply) {
-  return { hello: "node.js" };
-});
-
-app.listen({ port: 3001 }).then(() => {
-  console.log("Server is running... 🚀");
-});
+app.register(usersRoutes);
+app.register(plantsRoutes);
