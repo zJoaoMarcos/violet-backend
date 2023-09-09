@@ -7,6 +7,7 @@ export interface PlantProps {
   age: number;
   serial: string;
   ownerId: string;
+  updatedAt?: Date | null;
 }
 
 export class Plant extends Entity<PlantProps> {
@@ -59,5 +60,9 @@ export class Plant extends Entity<PlantProps> {
 
   set ownerId(owner: string) {
     this.props.ownerId = owner;
+  }
+
+  get updatedAt() {
+    return this.props.updatedAt;
   }
 }
