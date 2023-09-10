@@ -1,17 +1,14 @@
 import { makeRegisterPlant } from "@/test/factories/make-register-plant";
 import { InMemoryPlantsRepository } from "@/test/repositories/in-memory/in-memory-plants-repository";
-import { InMemoryUsersRepository } from "@/test/repositories/in-memory/in-memory-users-repository";
 import { EditPlantUseCase } from "./edit-plant";
 
 let plantsRepository: InMemoryPlantsRepository;
-let usersRepository: InMemoryUsersRepository;
 let sut: EditPlantUseCase;
 
 describe("Edit Plant Use Case ", () => {
   beforeEach(() => {
     plantsRepository = new InMemoryPlantsRepository();
-    usersRepository = new InMemoryUsersRepository();
-    sut = new EditPlantUseCase(plantsRepository, usersRepository);
+    sut = new EditPlantUseCase(plantsRepository);
   });
 
   it("should be able to edit plant", async () => {
