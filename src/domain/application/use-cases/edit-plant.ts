@@ -1,6 +1,5 @@
 import { Plant } from "@/domain/enterprise/entities/plant";
 import { IPlantRepository } from "../repositories/plant.repository";
-import { IUserRepository } from "../repositories/user.repository";
 import { PlantNotFoundError } from "./errors/plant-not-found.error";
 
 interface EditPlantRequest {
@@ -15,10 +14,7 @@ interface EditPlantResponse {
 }
 
 export class EditPlantUseCase {
-  constructor(
-    private plantRepository: IPlantRepository,
-    private userRepository: IUserRepository
-  ) {}
+  constructor(private plantRepository: IPlantRepository) {}
 
   async execute({
     plantId,

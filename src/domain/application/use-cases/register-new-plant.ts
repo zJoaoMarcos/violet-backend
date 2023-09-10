@@ -39,7 +39,7 @@ export class RegisterNewPlantUseCase {
       age,
       kind,
       serial,
-      owner,
+      ownerId: owner.id.toString(),
     });
 
     await this.plantRepository.create(plant);

@@ -16,9 +16,9 @@ export async function fetchAllUserPlants(
   const { ownerId } = fetchAllUserPlantsSchema.parse(request.params);
 
   try {
-    const makeFetchAllUserPlantsUseCase = MakeFetchAllUserPlantsUseCase();
+    const fetchAllUserPlantsUseCase = MakeFetchAllUserPlantsUseCase();
 
-    const { plants } = await makeFetchAllUserPlantsUseCase.execute({
+    const { plants } = await fetchAllUserPlantsUseCase.execute({
       userId: ownerId,
     });
 
@@ -27,7 +27,7 @@ export async function fetchAllUserPlants(
       .send({ plants: plants.map(PlantPresenter.toHTTP) });
   } catch (err) {
     if (err instanceof PlantNotFoundError || err instanceof UserNotFoundError) {
-      return reply.status(404).send();
+      return reply.status(404).send({ message: err.message });
     }
 
     return reply.status(500).send();

@@ -1,8 +1,8 @@
 import { User } from "@/domain/enterprise/entities/user";
 import { IUserRepository } from "../repositories/user.repository";
-import { EmailNotRegisteredError } from "./errors/email-not-registered.error";
 
 import * as bcrypt from "bcrypt";
+import { EmailOrPasswordIncorretError } from "./errors/email-or-password-incorret.error";
 
 interface UpdatePasswordRequest {
   email: string;
@@ -41,6 +41,6 @@ export class UpdatePasswordUseCase {
       }
     }
 
-    throw new EmailNotRegisteredError();
+    throw new EmailOrPasswordIncorretError();
   }
 }
