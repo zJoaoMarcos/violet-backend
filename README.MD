@@ -17,3 +17,5 @@
 
 - [x] Autenticação JWT
 - [x] Refresh Token TODO: Validar
+- [x] Unit Tests
+- [] e2e Tests TODO: Feat
